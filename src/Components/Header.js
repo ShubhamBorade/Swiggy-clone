@@ -1,5 +1,6 @@
 import logo from "../Utils/swiggy.svg"
 import { useState } from "react";
+import { Link } from "react-router-dom"
 
 const Header = () =>{
 
@@ -11,9 +12,9 @@ const Header = () =>{
       </div>
       <div className="right">
         <ul className="flex justify-between mt-3 mr-[120px]">
-            <li className="px-8 py-1 cursor-pointer font-semibold hover:text-blue-400">Home</li>
-            <li className="px-8 py-1 cursor-pointer font-semibold hover:text-blue-400">About</li>
-            <li className="px-8 py-1 cursor-pointer font-semibold hover:text-blue-400">Contact Us</li>
+            <li className="px-8 py-1 cursor-pointer font-semibold hover:text-blue-400"> <Link to="/">Home</Link></li>
+            <li className="px-8 py-1 cursor-pointer font-semibold hover:text-blue-400"> <Link to="/about">About</Link></li>
+            <li className="px-8 py-1 cursor-pointer font-semibold hover:text-blue-400"> <Link to="/contact">Contact Us</Link></li>
             <li className="px-8 py-1 cursor-pointer font-semibold hover:text-blue-400">Cart</li>
             <button className="px-3 py-1 mx-2 bg-gray-300 rounded" onClick={()=> btn==="Login" ? setBtn("Logout"):setBtn("Login")}>{btn}</button>
         </ul>

@@ -21,7 +21,7 @@ const Body = () => {
 
     setFilteredRestro(json?.data?.cards[2]?.data?.data?.cards); //original list of restro
 
-    setCopyOfRestro(json?.data?.cards[2]?.data?.data?.cards); //copy of original list of restro
+    setCopyOfRestro(json?.data?.cards[2]?.data?.data?.cards); //copy of original list of restro in which we will filtered so that original list of restro remains unaltered because when we search second time it will search from original list of restro(all 15 restro)
   }
 
   if(filteredRestro.length === 0){
@@ -34,7 +34,7 @@ const Body = () => {
 
             <div className='btn bg-gray-100  flex justify-between h-10'>
 
-              {/* input search functionality */}
+              {/* input search functionality / filtering the restor with name*/}
               <div className='mt-2'>
                 <input className='outline-none ml-2 border-2 border-gray-300' type="text" 
                 value={searchText}
@@ -55,6 +55,7 @@ const Body = () => {
             </div>
 
            </div>
+           {/* mapping over filtered restro */}
            <div className='restaurant-container flex flex-wrap mx-3'>
              { 
                filteredRestro.map((restaurant)=>(

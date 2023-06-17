@@ -1,22 +1,13 @@
 import Header from './Components/Header';
 import './App.css';
-import Body from './Components/Body';
+import {Outlet} from "react-router-dom"
 
 function App() {
+
   return (
-    <div className="App">
-      {/* Header
-          -Logo
-          -Nav Items
-         Body
-          -Search
-          -RestaurantContainer
-         Footer
-          -copyright
-          -links 
-  */}
+    <div className="">
       <Header/>
-      <Body/>
+      <Outlet/>
     </div>
   );
 }
