@@ -1,10 +1,11 @@
 import React,{useState,useEffect} from 'react'
 import RestaurantCard from './RestaurantCard'
 import Shimmer from './Shimmer'
+import {Link} from "react-router-dom"
 
 const Body = () => {
 
-  const [filteredRestro, setFilteredRestro] = useState([]); //original list of restro that we want to be unchange
+  const [filteredRestro, setFilteredRestro] = useState(null); //original list of restro that we want to be unchange
 
   const [copyofRestro,setCopyOfRestro] = useState([]); //copy of original list of restro in which we will apply filters
 
@@ -24,7 +25,7 @@ const Body = () => {
     setCopyOfRestro(json?.data?.cards[2]?.data?.data?.cards); //copy of original list of restro in which we will filtered so that original list of restro remains unaltered because when we search second time it will search from original list of restro(all 15 restro)
   }
 
-  if(filteredRestro.length === 0){
+  if(filteredRestro === null){
     return <Shimmer/>
   }
 
@@ -32,7 +33,7 @@ const Body = () => {
             <div>
             <div className='mt-28'>
 
-            <div className='btn bg-gray-100  flex justify-between h-10'>
+            <div className='btn bg-gray-100  flex justify-around h-10'>
 
               {/* input search functionality / filtering the restor with name*/}
               <div className='mt-2'>
@@ -48,7 +49,7 @@ const Body = () => {
 
               
             {/* {  filter logic with rating greater than 4} */}
-            <button className='w-24 ml-10  border-1 p-1 rounded-full px-4 bg-gray-200 border-gray-300 hover:bg-gray-400'  onClick={()=>{
+            <button className='w-48 ml-10  border-1 p-1 rounded-full px-4 bg-gray-200 border-gray-300 hover:bg-gray-400'  onClick={()=>{
               const  filterRestroByRating = copyofRestro.filter((res)=> res.data.avgRating > 4 )
               setFilteredRestro(filterRestroByRating)
             }}>Top Rated Restaurant</button>
@@ -59,7 +60,7 @@ const Body = () => {
            <div className='restaurant-container flex flex-wrap mx-3'>
              { 
                filteredRestro.map((restaurant)=>(
-              <RestaurantCard key={restaurant.data.id}  resList={restaurant}/>
+             <Link key={restaurant.data.id}  to={"/restaurant/" + restaurant.data.id}> <RestaurantCard  resList={restaurant}/></Link>
               ))} 
            </div>
            </div>

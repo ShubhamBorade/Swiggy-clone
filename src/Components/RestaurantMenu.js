@@ -1,31 +1,42 @@
 import {useState, useEffect } from "react";
-// import Shimmer from "./Shimmer";
+import Shimmer from "./Shimmer";
+import { useParams } from "react-router-dom";
+import { MENU_URL } from "../Utils/Constants";
 
 const RestaurantMenu = () =>{
 
-    const [resInfo, setResInfo] = useState()
+    const [resInfo, setResInfo] = useState(null)
+
+    const {resId} = useParams();
+
 
     useEffect(()=>{
       fetchMenu();
     },[])
 
     const fetchMenu = async () =>{
-        const data = await fetch("https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9351929&lng=77.62448069999999&restaurantId=425&submitAction=ENTER");
+        const data = await fetch(MENU_URL+resId+"&submitAction=ENTER");
         const json = await data.json();
         // console.log(json.data.cards[0].card.card.info.name);
-        setResInfo(json.data.cards[0].card.card.info);
+        console.log(json)
+        setResInfo(json.data);
     }
+   
+    //keep this line here only dont user ternary operator else it will throuw error
+    if(resInfo === null) return <Shimmer/>
 
-    //  const {name} = resInfo?.cards[0]?.card?.card?.info;
+    const {name,cuisines} =resInfo?.cards[0]?.card?.card?.info;
 
-
+    const {itemCards} = resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card //to fetch menu
+      
+    console.log(itemCards);
     return (
         <div className="mt-20">
-            <h1>{resInfo.name}</h1>
-            <h2>{resInfo.cuisines.join(",")}</h2>
-            <ul>
-                <li>{resInfo.avgRating}</li>
-                <li> {resInfo.costForTwo/100}</li>
+             <h1 className="font-bold">{name}</h1> 
+             <h3 className="ml-5">{cuisines.join(",")}</h3>
+             <h1 className="font-bold">Menu</h1>
+            <ul className="ml-5">
+                {itemCards.map((item)=> <li key={item?.card?.info?.id}>{item?.card?.info?.name} - {"Rs."}{item?.card?.info?.price/100 || item?.card?.info?.defaultPrice /100}</li>)}
             </ul>
         </div>
     )
