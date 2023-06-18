@@ -2,6 +2,7 @@ import {useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
 import { MENU_URL } from "../Utils/Constants";
+import { MENU_LIST_URL } from "../Utils/Constants";
 
 const RestaurantMenu = () =>{
 
@@ -18,7 +19,7 @@ const RestaurantMenu = () =>{
         const data = await fetch(MENU_URL+resId+"&submitAction=ENTER");
         const json = await data.json();
         // console.log(json.data.cards[0].card.card.info.name);
-        console.log(json)
+        // console.log(json)
         setResInfo(json.data);
     }
    
@@ -31,12 +32,24 @@ const RestaurantMenu = () =>{
       
     console.log(itemCards);
     return (
-        <div className="mt-20">
-             <h1 className="font-bold">{name}</h1> 
-             <h3 className="ml-5">{cuisines.join(",")}</h3>
+        <div className="mt-24 mx-auto w-9/12">
+             <h1 className="font-semibold text-2xl">{name}</h1> 
+             <h3 className="ml-5 mt-2">{cuisines.join(",")}</h3>
+             <hr className="my-2"/>
              <h1 className="font-bold">Menu</h1>
-            <ul className="ml-5">
-                {itemCards.map((item)=> <li key={item?.card?.info?.id}>{item?.card?.info?.name} - {"Rs."}{item?.card?.info?.price/100 || item?.card?.info?.defaultPrice /100}</li>)}
+            <ul className="ml-5 my-4">
+                {itemCards.map((item)=>
+                <div key={item?.card?.info?.id}>
+                    <div className="flex justify-between">
+                        <li className="my-3" >{item?.card?.info?.name} <br/>  {"Rs."}{item?.card?.info?.price/100 || item?.card?.info?.defaultPrice /100} </li>
+                        <div className="flex-col justify-center">
+                            <img className="w-36" src={MENU_LIST_URL+item?.card?.info?.imageId}/>
+                            <button className="text-green-600 font-semibold ml-11 bg-gray-200 px-3 mt-1 hover:shadow-md">ADD</button>
+                        </div>
+                    </div>
+                    <hr className="my-10"/>
+                 </div>
+                 )}
             </ul>
         </div>
     )
