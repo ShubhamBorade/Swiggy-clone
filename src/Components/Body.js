@@ -33,14 +33,14 @@ const Body = () => {
             <div>
             <div className='mt-28'>
 
-            <div className='btn bg-gray-100  flex justify-around h-10'>
+            <div className='btn bg-gray-100  flex justify-around h-12'>
 
               {/* input search functionality / filtering the restor with name*/}
               <div className='mt-2'>
-                <input className='outline-none ml-2 border-2 border-gray-300' type="text" 
+                <input className='outline-none ml-2 border-2 border-gray-300 h-8' type="text" 
                 value={searchText}
                 onChange={(e)=> setSearchText(e.target.value)}/>
-                <button className='w-20 bg-gray-300 ml-2' 
+                <button className='w-20 bg-gray-300 ml-2 rounded py-1' 
                 onClick={()=>{
                   const filteredRestroByName = copyofRestro.filter((res)=> res.data.name.toLowerCase().includes(searchText.toLowerCase()))
                   setFilteredRestro(filteredRestroByName);
