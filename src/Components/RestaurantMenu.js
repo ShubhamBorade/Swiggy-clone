@@ -1,27 +1,13 @@
-import {useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
-import { MENU_URL } from "../Utils/Constants";
 import { MENU_LIST_URL } from "../Utils/Constants";
+import useRestaurantMenu from "../Utils/useRestaurantMenu";
 
 const RestaurantMenu = () =>{
 
-    const [resInfo, setResInfo] = useState(null)
-
     const {resId} = useParams();
 
-
-    useEffect(()=>{
-      fetchMenu();
-    },[])
-
-    const fetchMenu = async () =>{
-        const data = await fetch(MENU_URL+resId+"&submitAction=ENTER");
-        const json = await data.json();
-        // console.log(json.data.cards[0].card.card.info.name);
-        // console.log(json)
-        setResInfo(json.data);
-    }
+    const resInfo = useRestaurantMenu(resId);
    
     //keep this line here only dont user ternary operator else it will throuw error
     if(resInfo === null) return <Shimmer/>
