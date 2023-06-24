@@ -3,6 +3,7 @@ import RestaurantCard from './RestaurantCard'
 import Shimmer from './Shimmer'
 import {Link} from "react-router-dom"
 
+
 const Body = () => {
 
   const [filteredRestro, setFilteredRestro] = useState(null); //original list of restro that we want to be unchange
@@ -25,9 +26,12 @@ const Body = () => {
     setCopyOfRestro(json?.data?.cards[2]?.data?.data?.cards); //copy of original list of restro in which we will filtered so that original list of restro remains unaltered because when we search second time it will search from original list of restro(all 15 restro)
   }
 
+
+
   if(filteredRestro === null){
     return <Shimmer/>
   }
+
 
     return (
             <div>

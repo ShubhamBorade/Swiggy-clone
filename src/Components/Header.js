@@ -1,10 +1,15 @@
 import logo from "../Utils/swiggy.svg"
 import { useState } from "react";
 import { Link } from "react-router-dom"
+import useOnlineStatus from '../Utils/useOnlineStatus'
 
 const Header = () =>{
 
-  const [btn, setBtn] = useState("Login")
+  const [btn, setBtn] = useState("Login");
+
+  const onlineStatus = useOnlineStatus();
+
+
     return (
      <div className="flex justify-between bg-blue-50 shadow-lg fixed top-0 w-full">
       <div className="left">
@@ -12,6 +17,7 @@ const Header = () =>{
       </div>
       <div className="right">
         <ul className="flex justify-between mt-3 mr-[120px]">
+            <li className="py-1">OnlineStatus : {onlineStatus ? "🟢" : "🔴"}</li>
             <li className="px-8 py-1 cursor-pointer font-semibold hover:text-blue-400"> <Link to="/">Home</Link></li>
             <li className="px-8 py-1 cursor-pointer font-semibold hover:text-blue-400"> <Link to="/about">About</Link></li>
             <li className="px-8 py-1 cursor-pointer font-semibold hover:text-blue-400"> <Link to="/contact">Contact Us</Link></li>
