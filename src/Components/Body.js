@@ -6,6 +6,7 @@ import {Link} from "react-router-dom"
 
 const Body = () => {
 
+
   const [filteredRestro, setFilteredRestro] = useState(null); //original list of restro that we want to be unchange
 
   const [copyofRestro,setCopyOfRestro] = useState([]); //copy of original list of restro in which we will apply filters
@@ -44,7 +45,7 @@ const Body = () => {
                 <input className='outline-none ml-2 border-2 border-gray-300 h-8' type="text" 
                 value={searchText}
                 onChange={(e)=> setSearchText(e.target.value)}/>
-                <button className='w-20 bg-gray-300 ml-2 rounded py-1' 
+                <button className='w-20 bg-gray-300 ml-2 rounded py-1 hover:bg-gray-400' 
                 onClick={()=>{
                   const filteredRestroByName = copyofRestro.filter((res)=> res.data.name.toLowerCase().includes(searchText.toLowerCase()))
                   setFilteredRestro(filteredRestroByName);
