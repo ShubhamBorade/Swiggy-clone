@@ -2,12 +2,20 @@ import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
 import { MENU_LIST_URL } from "../Utils/Constants";
 import useRestaurantMenu from "../Utils/useRestaurantMenu";
+import { useDispatch } from "react-redux";
+import { addItem } from "../Utils/cartSlice";
 
 const RestaurantMenu = () =>{
 
     const {resId} = useParams();
 
     const resInfo = useRestaurantMenu(resId);
+
+    const dispatch = useDispatch();
+
+    const addFoodItem = (item) =>{
+       dispatch(addItem(item));
+    }
    
     //keep this line here only dont user ternary operator else it will throuw error
     if(resInfo === null) return <Shimmer/>
@@ -17,6 +25,7 @@ const RestaurantMenu = () =>{
     const {itemCards} = resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card //to fetch menu
       
     // console.log(itemCards);
+
     return (
         <div className="mt-24 mx-auto w-9/12">
             <div>
@@ -37,7 +46,7 @@ const RestaurantMenu = () =>{
                         <li className="my-3 font-semibold" >{item?.card?.info?.name} <br/>  {"Rs."}{item?.card?.info?.price/100 || item?.card?.info?.defaultPrice /100} </li>
                         <div className="flex-col justify-center">
                             <img className="w-36 shadow-xl cursor-pointer" src={MENU_LIST_URL+item?.card?.info?.imageId}/>
-                            <button className="text-green-600 font-semibold ml-11 bg-gray-200 px-3 mt-3 hover:shadow-md" alt="image">ADD</button>
+                            <button className="text-green-600 font-semibold ml-11 bg-gray-200 px-3 mt-3 hover:shadow-md" alt="image" onClick={()=>addFoodItem(item)}>ADD</button>
                         </div>
                     </div>
                     <hr className="my-10"/>
