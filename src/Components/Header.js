@@ -20,11 +20,11 @@ const Header = () =>{
       </div>
       <div className="right">
         <ul className="flex justify-between mt-3 mr-[120px]">
-            <li className="py-1">OnlineStatus : {onlineStatus ? "🟢" : "🔴"}</li>
+            {/* <li className="py-1">OnlineStatus : {onlineStatus ? "🟢" : "🔴"}</li> */}
             <li className="px-8 py-1 cursor-pointer font-semibold hover:text-blue-400"> <Link to="/">Home</Link></li>
             <li className="px-8 py-1 cursor-pointer font-semibold hover:text-blue-400"> <Link to="/about">About</Link></li>
             <li className="px-8 py-1 cursor-pointer font-semibold hover:text-blue-400"> <Link to="/contact">Contact Us</Link></li>
-            <li className="px-8 py-1 cursor-pointer font-semibold hover:text-blue-400">  <Link to="/cart">Cart</Link> {cartItems.length}</li>
+            <li className="px-8 py-1 cursor-pointer font-semibold hover:text-blue-400">  <Link to="/cart">Cart</Link> <span className="bg-yellow-400 rounded-full px-2 text-white">{cartItems.length}</span> </li>
             <button className="px-3 py-1 mx-2 bg-gray-300 rounded" onClick={()=> btn==="Login" ? setBtn("Logout"):setBtn("Login")}>{btn}</button>
         </ul>
 
