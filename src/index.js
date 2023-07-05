@@ -10,7 +10,10 @@ import Body from './Components/Body';
 import RestaurantMenu from "./Components/RestaurantMenu"
 import Cart from "./Components/Cart"
 
+
+
 const About = lazy(()=>import("./Components/About"));
+
 
 const appRouter = createBrowserRouter([
   {
@@ -35,7 +38,7 @@ const appRouter = createBrowserRouter([
       },
       {
         path:"/cart",
-        element: <Cart/>
+        element:<Cart/>
       }
     ],
     errorElement: <Error/>
