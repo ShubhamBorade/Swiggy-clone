@@ -4,7 +4,7 @@ import { CDN_URL } from '../Utils/Constants';
 const RestaurantCard = ({resList}) => {
 
 
-    const {name,cuisines,cloudinaryImageId,costForTwo,deliveryTime,avgRating} =resList.data;
+    const {name,cuisines,cloudinaryImageId,costForTwo,deliveryTime,avgRating} =resList;
     return (
         <div>
             <div className=' my-6  w-60  ml-1 hover:cursor-pointer mx-16 bg-gray-100  transition hover:shadow-[0px_0px_8px_2px_rgba(0,0,0,0.3)] rounded-lg'>

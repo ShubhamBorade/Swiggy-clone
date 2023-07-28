@@ -35,8 +35,8 @@ const Cart = () =>{
                 {cartItems.map((item)=><FoodItem key={item.card.info.id} cartItems={item} />)}
             </div>
 
-            <div className="flex font-semibold justify-between">
-                <h1>Net Pay</h1>
+            <div className="flex font-semibold justify-between my-3 ml-[450px]">
+                <h1>Total Pay</h1>
                 <h1>₹{total/100}</h1>
             </div>
        </div>

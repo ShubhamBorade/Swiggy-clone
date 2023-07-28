@@ -1,20 +1,25 @@
 import { CDN_URL } from '../Utils/Constants';
-
+import { useDispatch } from 'react-redux';
+import { addItem } from '../Utils/cartSlice';
+import { useState } from 'react';
 
 const FoodItem = ({cartItems}) => {
 
-    const items = Object.entries(cartItems);
+    const [count, setCount] = useState(1);
 
-        console.log(items)
+        // console.log(items)
     // console.log(cartItems[0].card.info.price)
     //  const {name,description,imageId} = item.card.info;
+    const dispatch = useDispatch();
 
     const {name,price,imageId} =cartItems.card.info;
     
-    // const total = items.reduce((acc,curr)=>{
-    //     acc = acc + curr.card.info.price;
-    //     return acc;
-    // },0)
+    const HandleAddItems = () =>{
+        dispatch(addItem(cartItems));
+         setCount(count + 1);
+    }
+
+    console.log(cartItems)
 
     return (
         <div>
@@ -26,8 +31,8 @@ const FoodItem = ({cartItems}) => {
                  </div>   
                     <span className='w-20 h-7 flex justify-between border-[1px] border-gray-400 pb-3'>
                         <span  className='ml-1 font-bold '>-</span>
-                        <span className=''>0</span>
-                        <span className='mr-1  font-bold '>+</span>
+                        <span className=''>{count}</span>
+                        <span onClick={()=>HandleAddItems()} className='mr-1  font-bold '>+</span>
                     </span>
 
                     <span className='ml-20'>₹{price/100}</span>

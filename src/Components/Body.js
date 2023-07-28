@@ -22,9 +22,15 @@ const Body = () => {
     const json = await data.json();
     console.log(json);
 
-    setFilteredRestro(json?.data?.cards[2]?.data?.data?.cards); //original list of restro
+    // setFilteredRestro(json?.data?.cards[2]?.data?.data?.cards); //original list of restro
 
-    setCopyOfRestro(json?.data?.cards[2]?.data?.data?.cards); //copy of original list of restro in which we will filtered so that original list of restro remains unaltered because when we search second time it will search from original list of restro(all 15 restro)
+    // setCopyOfRestro(json?.data?.cards[2]?.data?.data?.cards); //copy of original list of restro in which we will filtered so that original list of restro remains unaltered because when we search second time it will search from original list of restro(all 15 restro)
+    setCopyOfRestro(
+      json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
+    setFilteredRestro(
+      json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
   }
 
 
@@ -65,7 +71,7 @@ const Body = () => {
            <div className='restaurant-container flex flex-wrap mx-3'>
              { 
                filteredRestro.map((restaurant)=>(
-             <Link key={restaurant.data.id}  to={"/restaurant/" + restaurant.data.id}> <RestaurantCard  resList={restaurant}/></Link>
+             <Link key={restaurant?.info.id}  to={"/restaurant/" +  restaurant?.info.id}> <RestaurantCard  resList={restaurant?.info}/></Link>
               ))} 
            </div>
            </div>
@@ -74,3 +80,7 @@ const Body = () => {
 }
 
 export default Body
+
+
+//our resList there's resData
+//out CopyOfRestro there's ListOfRestaurant
